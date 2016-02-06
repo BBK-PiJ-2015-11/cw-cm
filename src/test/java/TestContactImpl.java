@@ -32,4 +32,13 @@ public class TestContactImpl {
   public void testGetNotes() {
     assertEquals(notes, contact.getNotes());
   }
+
+  @Test
+  public void testAddNotes() {
+    String additionalNote = "Bobble";
+    String mergedNotes = notes + "\n" + additionalNote;
+
+    contact.addNotes(additionalNote);
+    assertEquals(mergedNotes, contact.getNotes());
+  }
 }
