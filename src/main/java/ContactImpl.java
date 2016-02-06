@@ -15,7 +15,7 @@ public class ContactImpl implements Contact {
 
   @Override
   public String getName() {
-    throw new UnsupportedOperationException("Not yet implemented");
+    return this.name;
   }
 
   @Override
