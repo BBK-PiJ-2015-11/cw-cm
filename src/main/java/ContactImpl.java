@@ -23,8 +23,19 @@ public class ContactImpl implements Contact {
     return this.notes;
   }
 
+  /**
+   * {@inheritDoc}
+   * <p>
+   * If supplied `notes` argument is non-null, append its contents
+   * to the existing notes, separated by a newline character.
+   * <p>
+   * If argument is null, do nothing.
+   *
+   **/
   @Override
   public void addNotes(String notes) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    if (notes != null) {
+      this.notes += "\n" + notes;
+    }
   }
 }
