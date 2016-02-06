@@ -19,17 +19,17 @@ public class TestContactImpl {
   }
 
   @Test
-  public void testId() {
+  public void testGetId() {
     assertEquals(id, contact.getId());
   }
 
   @Test
-  public void testName() {
+  public void testGetName() {
     assertEquals(name, contact.getName());
   }
 
   @Test
-  public void testNotes() {
+  public void testGetNotes() {
     assertEquals(notes, contact.getNotes());
   }
 }
