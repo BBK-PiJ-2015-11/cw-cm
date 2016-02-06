@@ -48,7 +48,7 @@ public interface ContactManager {
 
   /**
    * Returns the list of future meetings scheduled with this contact.
-   * <p/>
+   * <p>
    * If there are none, the returned list will be empty. Otherwise,
    * the list will be chronologically sorted and will not contain any
    * duplicates.
@@ -63,7 +63,7 @@ public interface ContactManager {
   /**
    * Returns the list of meetings that are scheduled for, or thattook
    * place on, the specified date
-   * <p/>
+   * <p>
    * If there are none, the returned list will be empty. Otherwise,
    * the list will be chronologically sorted and will not contain any
    * duplicates.
@@ -75,7 +75,7 @@ public interface ContactManager {
 
   /**
    * Returns the list of past meetings in which this contact has participated.
-   * <p/>
+   * <p>
    * If there are none, the returned list will be empty. Otherwise,
    * the list will be chronologically sorted and will not contain any
    * duplicates.
@@ -100,10 +100,10 @@ public interface ContactManager {
 
   /**
    * Add notes to a meeting.
-   * <p/>
+   * <p>
    * This method is used when a future meeting takes place, and is
    * then converted to a past meeting (with notes).
-   * <p/>
+   * <p>
    * It can be also used to add notes to a past meeting at a later date.
    *
    * @param id   the ID of the meeting
@@ -143,7 +143,7 @@ public interface ContactManager {
 
   /**
    * Save all data to disk.
-   * <p/>
+   * <p>
    * This method must be executed when the program is
    * closed and when/if the user requests it.
    */
