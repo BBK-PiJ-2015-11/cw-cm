@@ -20,7 +20,7 @@ public class ContactImpl implements Contact {
 
   @Override
   public String getNotes() {
-    throw new UnsupportedOperationException("Not yet implemented");
+    return this.notes;
   }
 
   @Override
