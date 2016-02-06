@@ -10,7 +10,7 @@ public class ContactImpl implements Contact {
 
   @Override
   public int getId() {
-    throw new UnsupportedOperationException("Not yet implemented");
+    return this.id;
   }
 
   @Override
