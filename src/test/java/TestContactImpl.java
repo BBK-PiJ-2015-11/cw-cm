@@ -22,4 +22,9 @@ public class TestContactImpl {
   public void testId() {
     assertEquals(id, contact.getId());
   }
+
+  @Test
+  public void testName() {
+    assertEquals(name, contact.getName());
+  }
 }
