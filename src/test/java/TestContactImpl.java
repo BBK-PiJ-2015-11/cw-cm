@@ -27,4 +27,9 @@ public class TestContactImpl {
   public void testName() {
     assertEquals(name, contact.getName());
   }
+
+  @Test
+  public void testNotes() {
+    assertEquals(notes, contact.getNotes());
+  }
 }
