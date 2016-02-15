@@ -15,32 +15,46 @@ public class TestMeetingImpl {
   private Calendar startDate;
   private Set<Contact> contacts;
 
+  /**
+   * MeetingImpl is abstract, so create a non-abstract implementation
+   * which acts as thin wrapper around MeetingImpl so that we can test it.
+   */
+  public class NonAbstractMeetingImpl extends MeetingImpl {
+    private int id;
+    private Calendar startDate;
+    private Set<Contact> contacts;
+
+    public NonAbstractMeetingImpl(int id, Calendar startDate, Set<Contact> contacts) {
+      super(id, startDate, contacts);
+    }
+  }
+
   @Before
   public void setUp() {
     id = 9;
     startDate = new GregorianCalendar(2016,2,15);
     contacts = new HashSet<Contact>();
-    meeting = new MeetingImpl(id, startDate, contacts);
+    meeting = new NonAbstractMeetingImpl(id, startDate, contacts);
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void testNegativeValueInConstructorParamId() {
-    meeting = new MeetingImpl(-4, startDate, contacts);
+    meeting = new NonAbstractMeetingImpl(-4, startDate, contacts);
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void testZeroValueInConstructorParamId() {
-    meeting = new MeetingImpl(0, startDate, contacts);
+    meeting = new NonAbstractMeetingImpl(0, startDate, contacts);
   }
 
   @Test (expected = NullPointerException.class)
   public void testNullValueInConstructorParamDate() {
-    meeting = new MeetingImpl(id, null, contacts);
+    meeting = new NonAbstractMeetingImpl(id, null, contacts);
   }
 
   @Test (expected = NullPointerException.class)
   public void testNullValueInConstructorParamContacts() {
-    meeting = new MeetingImpl(id, startDate, null);
+    meeting = new NonAbstractMeetingImpl(id, startDate, null);
   }
 
   @Test
