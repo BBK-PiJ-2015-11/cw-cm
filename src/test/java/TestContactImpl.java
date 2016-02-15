@@ -24,6 +24,11 @@ public class TestContactImpl {
     contact = new ContactImpl(id, null, notes);
   }
 
+  @Test (expected = NullPointerException.class)
+  public void testNullValueInConstructorParamNotes() {
+    contact = new ContactImpl(id, name, null);
+  }
+
   @Test
   public void testGetId() {
     assertEquals(id, contact.getId());
