@@ -8,11 +8,21 @@ public class PastMeetingImpl extends MeetingImpl implements PastMeeting {
   private String notes;
 
   public PastMeetingImpl(int id, Calendar startDate, Set<Contact> contacts, String notes) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    super(id, startDate, contacts);
+
+    if (contacts.isEmpty()) {
+      throw new IllegalArgumentException();
+    }
+
+    if (notes == null) {
+      throw new NullPointerException();
+    }
+
+    this.notes = notes;
   }
 
   @Override
   public String getNotes() {
-    throw new UnsupportedOperationException("Not yet implemented");
+    return this.notes;
   }
 }
