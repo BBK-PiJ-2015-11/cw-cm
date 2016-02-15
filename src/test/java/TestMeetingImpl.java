@@ -27,4 +27,14 @@ public class TestMeetingImpl {
   public void testGetId() {
     assertEquals(id, meeting.getId());
   }
+
+  @Test
+  public void testGetDate() {
+    assertEquals(startDate, meeting.getDate());
+  }
+
+  @Test
+  public void testGetContacts() {
+    assertEquals(contacts, meeting.getContacts());
+  }
 }
