@@ -7,6 +7,10 @@ public class ContactImpl implements Contact {
       throw new NullPointerException();
     }
 
+    if (notes == null) {
+      throw new NullPointerException();
+    }
+
     this.id = id;
     this.name = name;
     this.notes = notes;
