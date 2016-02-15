@@ -18,6 +18,26 @@ public class TestContactImpl {
     contact = new ContactImpl(id, name, notes);
   }
 
+  @Test
+  public void testSimpleConstructorHappyPath() {
+    contact = new ContactImpl(id, name);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testNegativeValueInSimpleConstructorParamId() {
+    contact = new ContactImpl(-4, name);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testZeroValueInSimpleConstructorParamId() {
+    contact = new ContactImpl(0, name);
+  }
+
+  @Test (expected = NullPointerException.class)
+  public void testNullValueInSimpleConstructorParamName() {
+    contact = new ContactImpl(id, null);
+  }
+
   @Test (expected = IllegalArgumentException.class)
   public void testNegativeValueInConstructorParamId() {
     contact = new ContactImpl(-4, name, notes);
