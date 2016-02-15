@@ -3,6 +3,10 @@ public class ContactImpl implements Contact {
   private String name, notes;
 
   public ContactImpl(int id, String name, String notes) {
+    if (id < 1) {
+      throw new IllegalArgumentException();
+    }
+
     if (name == null) {
       throw new NullPointerException();
     }
