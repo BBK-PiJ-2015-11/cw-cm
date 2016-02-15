@@ -41,4 +41,12 @@ public class TestContactImpl {
     contact.addNotes(additionalNote);
     assertEquals(mergedNotes, contact.getNotes());
   }
+
+  @Test
+  public void testAddNullNotes() {
+    String additionalNote = null;
+
+    contact.addNotes(additionalNote);
+    assertEquals(notes, contact.getNotes());
+  }
 }
