@@ -19,11 +19,11 @@ public class MeetingImpl implements Meeting {
 
   @Override
   public Calendar getDate() {
-    throw new UnsupportedOperationException("Not yet implemented");
+    return this.startDate;
   }
 
   @Override
   public Set<Contact> getContacts() {
-    throw new UnsupportedOperationException("Not yet implemented");
+    return this.contacts;
   }
 }
