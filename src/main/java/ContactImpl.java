@@ -2,6 +2,10 @@ public class ContactImpl implements Contact {
   private int id;
   private String name, notes;
 
+  public ContactImpl(int id, String name) {
+    this(id, name, "");
+  }
+
   public ContactImpl(int id, String name, String notes) {
     if (id < 1) {
       throw new IllegalArgumentException();
