@@ -7,6 +7,18 @@ public class MeetingImpl implements Meeting {
   private Set<Contact> contacts;
 
   public MeetingImpl(int id, Calendar startDate, Set<Contact> contacts) {
+    if (id < 1) {
+      throw new IllegalArgumentException();
+    }
+
+    if (startDate == null) {
+      throw new NullPointerException();
+    }
+
+    if (contacts == null) {
+      throw new NullPointerException();
+    }
+
     this.id = id;
     this.startDate = startDate;
     this.contacts = contacts;
