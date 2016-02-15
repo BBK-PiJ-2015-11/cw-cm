@@ -49,4 +49,13 @@ public class TestContactImpl {
     contact.addNotes(additionalNote);
     assertEquals(notes, contact.getNotes());
   }
+
+  @Test
+  public void testAddEmptyNotes() {
+    String additionalNote = "";
+    String mergedNotes = notes + "\n" + additionalNote;
+
+    contact.addNotes(additionalNote);
+    assertEquals(mergedNotes, contact.getNotes());
+  }
 }
