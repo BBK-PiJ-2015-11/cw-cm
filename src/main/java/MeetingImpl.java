@@ -7,12 +7,14 @@ public class MeetingImpl implements Meeting {
   private Set<Contact> contacts;
 
   public MeetingImpl(int id, Calendar startDate, Set<Contact> contacts) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    this.id = id;
+    this.startDate = startDate;
+    this.contacts = contacts;
   }
 
   @Override
   public int getId() {
-    throw new UnsupportedOperationException("Not yet implemented");
+    return this.id;
   }
 
   @Override
