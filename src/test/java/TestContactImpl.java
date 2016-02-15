@@ -23,6 +23,11 @@ public class TestContactImpl {
     contact = new ContactImpl(-4, name, notes);
   }
 
+  @Test (expected = IllegalArgumentException.class)
+  public void testZeroValueInConstructorParamId() {
+    contact = new ContactImpl(0, name, notes);
+  }
+
   @Test (expected = NullPointerException.class)
   public void testNullValueInConstructorParamName() {
     contact = new ContactImpl(id, null, notes);
