@@ -23,6 +23,26 @@ public class TestMeetingImpl {
     meeting = new MeetingImpl(id, startDate, contacts);
   }
 
+  @Test (expected = IllegalArgumentException.class)
+  public void testNegativeValueInConstructorParamId() {
+    meeting = new MeetingImpl(-4, startDate, contacts);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testZeroValueInConstructorParamId() {
+    meeting = new MeetingImpl(0, startDate, contacts);
+  }
+
+  @Test (expected = NullPointerException.class)
+  public void testNullValueInConstructorParamDate() {
+    meeting = new MeetingImpl(id, null, contacts);
+  }
+
+  @Test (expected = NullPointerException.class)
+  public void testNullValueInConstructorParamContacts() {
+    meeting = new MeetingImpl(id, startDate, null);
+  }
+
   @Test
   public void testGetId() {
     assertEquals(id, meeting.getId());
