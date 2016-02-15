@@ -18,6 +18,12 @@ public class TestContactImpl {
     contact = new ContactImpl(id, name, notes);
   }
 
+
+  @Test (expected = NullPointerException.class)
+  public void testNullValueInConstructorParamName() {
+    contact = new ContactImpl(id, null, notes);
+  }
+
   @Test
   public void testGetId() {
     assertEquals(id, contact.getId());
