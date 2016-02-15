@@ -18,6 +18,10 @@ public class TestContactImpl {
     contact = new ContactImpl(id, name, notes);
   }
 
+  @Test (expected = IllegalArgumentException.class)
+  public void testNegativeValueInConstructorParamId() {
+    contact = new ContactImpl(-4, name, notes);
+  }
 
   @Test (expected = NullPointerException.class)
   public void testNullValueInConstructorParamName() {
