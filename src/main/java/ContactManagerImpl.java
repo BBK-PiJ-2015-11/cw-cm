@@ -1,8 +1,12 @@
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
 public class ContactManagerImpl implements ContactManager {
+  private HashMap<Integer, Contact> contacts = new HashMap<Integer, Contact>();
+  private int lastUsedContactId;
+
   public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
     throw new UnsupportedOperationException("Not yet implemented");
   }
@@ -44,7 +48,17 @@ public class ContactManagerImpl implements ContactManager {
   }
 
   public int addNewContact(String name, String notes) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    if (name == null || notes == null) {
+      throw new NullPointerException();
+    }
+
+    if (name.isEmpty() || notes.isEmpty()) {
+      throw new IllegalArgumentException();
+    }
+
+    Contact contact = new ContactImpl(this.getUnusedContactId(), name, notes);
+    this.contacts.put(contact.getId(), contact);
+    return contact.getId();
   }
 
   public Set<Contact> getContacts(int... ids) {
@@ -57,5 +71,10 @@ public class ContactManagerImpl implements ContactManager {
 
   public void flush() {
     throw new UnsupportedOperationException("Not yet implemented");
+  }
+
+  private int getUnusedContactId() {
+    this.lastUsedContactId++;
+    return this.lastUsedContactId;
   }
 }
