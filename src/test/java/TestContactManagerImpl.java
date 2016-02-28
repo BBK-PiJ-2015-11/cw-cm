@@ -57,4 +57,27 @@ public class TestContactManagerImpl {
   public void testGetContactsByIdsNonExistent() {
     contactManager.getContacts(1, 2);
   }
+
+  @Test
+  public void testGetContactsByName() {
+    int amyId = contactManager.addNewContact("Amy", "foo");
+    int bobId = contactManager.addNewContact("Bob", "bar");
+    int anotherAmyId = contactManager.addNewContact("Amy", "I'm a different Amy");
+    Set<Contact> contacts = contactManager.getContacts("Amy");
+
+    assertEquals(2, contacts.size());
+  }
+
+  @Test
+  public void testGetContactsByNameNonExistent() {
+    Set<Contact> contacts = contactManager.getContacts("Zuul");
+    assertEquals(0, contacts.size());
+  }
+
+  @Test (expected = NullPointerException.class)
+  public void testGetContactsByNameNull() {
+    // Cast null as string to disambiguate function signature
+    // to match getContacts(String name)
+    contactManager.getContacts((String) null);
+  }
 }
