@@ -62,7 +62,23 @@ public class ContactManagerImpl implements ContactManager {
   }
 
   public void addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    if (contacts == null || date == null || text == null) {
+      throw new NullPointerException();
+    }
+
+    if (contacts.size() == 0) {
+        throw new IllegalArgumentException();
+    }
+
+    for (Contact c : contacts) {
+      if (!this.contacts.containsKey(c.getId())) {
+        throw new IllegalArgumentException();
+      }
+    }
+
+    int id = this.getUnusedMeetingId();
+    Meeting m = new PastMeetingImpl(id, date, contacts, text);
+    this.meetings.put(id, m);
   }
 
   public PastMeeting addMeetingNotes(int id, String text) {
