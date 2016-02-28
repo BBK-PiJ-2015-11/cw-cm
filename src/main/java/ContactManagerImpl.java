@@ -7,10 +7,30 @@ import java.util.Set;
 
 public class ContactManagerImpl implements ContactManager {
   private HashMap<Integer, Contact> contacts = new HashMap<Integer, Contact>();
+  private HashMap<Integer, Meeting> meetings = new HashMap<Integer, Meeting>();
   private int lastUsedContactId;
+  private int lastUsedMeetingId;
 
   public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    if (contacts == null || date == null) {
+      throw new NullPointerException();
+    }
+
+    Calendar now = Calendar.getInstance();
+    if (date.before(now)) {
+      throw new IllegalArgumentException();
+    }
+
+    for (Contact c : contacts) {
+      if (!this.contacts.containsKey(c.getId())) {
+        throw new IllegalArgumentException();
+      }
+    }
+
+    int id = this.getUnusedMeetingId();
+    Meeting m = new FutureMeetingImpl(id, date, contacts);
+    this.meetings.put(id, m);
+    return id;
   }
 
   public PastMeeting getPastMeeting(int id) {
@@ -103,5 +123,10 @@ public class ContactManagerImpl implements ContactManager {
   private int getUnusedContactId() {
     this.lastUsedContactId++;
     return this.lastUsedContactId;
+  }
+
+  private int getUnusedMeetingId() {
+    this.lastUsedMeetingId++;
+    return this.lastUsedMeetingId;
   }
 }
