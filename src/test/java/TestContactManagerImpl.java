@@ -137,4 +137,60 @@ public class TestContactManagerImpl {
 
     contactManager.addFutureMeeting(contacts, null);
   }
+
+  @Test
+  public void testAddNewPastMeeting() {
+    int amyId = contactManager.addNewContact("Amy", "foo");
+    int bobId = contactManager.addNewContact("Bob", "bar");
+    Set<Contact> contacts = contactManager.getContacts(amyId, bobId);
+
+    contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
+  }
+
+  @Test
+  public void testAddNewPastMeetingAcceptsFutureDate() {
+    int amyId = contactManager.addNewContact("Amy", "foo");
+    int bobId = contactManager.addNewContact("Bob", "bar");
+    Set<Contact> contacts = contactManager.getContacts(amyId, bobId);
+
+    contactManager.addNewPastMeeting(contacts, this.futureDate, "Meeting notes");
+  }
+
+  @Test (expected = NullPointerException.class)
+  public void testAddNewPastMeetingNullContacts() {
+    contactManager.addNewPastMeeting(null, this.pastDate, "Meeting notes");
+  }
+
+  @Test (expected = NullPointerException.class)
+  public void testAddNewPastMeetingNullDate() {
+    int amyId = contactManager.addNewContact("Amy", "foo");
+    int bobId = contactManager.addNewContact("Bob", "bar");
+    Set<Contact> contacts = contactManager.getContacts(amyId, bobId);
+
+    contactManager.addNewPastMeeting(contacts, null, "Meeting notes");
+  }
+
+  @Test (expected = NullPointerException.class)
+  public void testAddNewPastMeetingNullNotes() {
+    int amyId = contactManager.addNewContact("Amy", "foo");
+    int bobId = contactManager.addNewContact("Bob", "bar");
+    Set<Contact> contacts = contactManager.getContacts(amyId, bobId);
+
+    contactManager.addNewPastMeeting(contacts, this.pastDate, null);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testAddNewPastMeetingEmptyContacts() {
+    Set<Contact> contacts = new HashSet<Contact>();
+    contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testAddNewPastMeetingNonexistentContacts() {
+    Set<Contact> contacts = new HashSet<Contact>();
+    Contact unknownContact = new ContactImpl(1, "Zuul",  "bork bork bork");
+    contacts.add(unknownContact);
+
+    contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
+  }
 }
