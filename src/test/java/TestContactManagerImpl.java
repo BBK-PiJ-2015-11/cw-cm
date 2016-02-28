@@ -1,16 +1,28 @@
+import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class TestContactManagerImpl {
   private ContactManager contactManager;
+  private Calendar futureDate;
+  private Calendar pastDate;
+  private Set<Contact> contacts;
 
   @Before
   public void setUp() {
+    futureDate = Calendar.getInstance();
+    futureDate.add(Calendar.YEAR, 1);
+    pastDate = Calendar.getInstance();
+    pastDate.add(Calendar.YEAR, -1);
+
     contactManager = new ContactManagerImpl();
   }
 
@@ -79,5 +91,50 @@ public class TestContactManagerImpl {
     // Cast null as string to disambiguate function signature
     // to match getContacts(String name)
     contactManager.getContacts((String) null);
+  }
+
+  @Test
+  public void testAddFutureMeetingReturnsPositiveId() {
+    int amyId = contactManager.addNewContact("Amy", "foo");
+    int bobId = contactManager.addNewContact("Bob", "bar");
+    Set<Contact> contacts = contactManager.getContacts(amyId, bobId);
+
+    int id = contactManager.addFutureMeeting(contacts, this.futureDate);
+    assertThat(id, greaterThan(0));
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testAddFutureMeetingWithPastDate() {
+    int amyId = contactManager.addNewContact("Amy", "foo");
+    int bobId = contactManager.addNewContact("Bob", "bar");
+    Set<Contact> contacts = contactManager.getContacts(amyId, bobId);
+
+    contactManager.addFutureMeeting(contacts, this.pastDate);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testAddFutureMeetingNonexistentContact() {
+    Set<Contact> contacts = new HashSet<Contact>();
+    Contact unknownContact = new ContactImpl(1, "Zuul",  "bork bork bork");
+    contacts.add(unknownContact);
+
+    contactManager.addFutureMeeting(contacts, this.futureDate);
+  }
+
+  @Test (expected = NullPointerException.class)
+  public void testAddFutureMeetingNullContacts() {
+    contactManager.addFutureMeeting(null, this.futureDate);
+  }
+
+  // The interface docs aren't clear - they specify
+  // that we should raise an exception if the meeting is null
+  // but I think it means if the contacts argument is null
+  @Test (expected = NullPointerException.class)
+  public void testAddFutureMeetingNullDate() {
+    int amyId = contactManager.addNewContact("Amy", "foo");
+    int bobId = contactManager.addNewContact("Bob", "bar");
+    Set<Contact> contacts = contactManager.getContacts(amyId, bobId);
+
+    contactManager.addFutureMeeting(contacts, null);
   }
 }
