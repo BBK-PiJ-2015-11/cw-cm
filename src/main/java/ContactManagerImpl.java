@@ -1,5 +1,6 @@
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -62,7 +63,21 @@ public class ContactManagerImpl implements ContactManager {
   }
 
   public Set<Contact> getContacts(int... ids) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    if (ids.length == 0) {
+      throw new IllegalArgumentException();
+    }
+
+    HashSet<Contact> contacts = new HashSet<Contact>();
+    for(int id : ids) {
+      Contact contact = this.contacts.get(id);
+      if (contact == null) {
+        throw new IllegalArgumentException();
+      }
+
+      contacts.add(contact);
+    }
+
+    return contacts;
   }
 
   public Set<Contact> getContacts(String name) {
