@@ -2,6 +2,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class ContactManagerImpl implements ContactManager {
@@ -81,7 +82,18 @@ public class ContactManagerImpl implements ContactManager {
   }
 
   public Set<Contact> getContacts(String name) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    if (name == null) {
+      throw new NullPointerException();
+    }
+
+    HashSet<Contact> contacts = new HashSet<Contact>();
+    for(Map.Entry<Integer, Contact> c : this.contacts.entrySet()) {
+      if (c.getValue().getName().equals(name)) {
+        contacts.add(c.getValue());
+      }
+    }
+
+    return contacts;
   }
 
   public void flush() {
