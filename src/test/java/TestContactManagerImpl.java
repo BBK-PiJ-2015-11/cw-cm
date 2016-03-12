@@ -73,9 +73,9 @@ public class TestContactManagerImpl {
 
   @Test
   public void testGetContactsByName() {
-    int amyId = contactManager.addNewContact("Amy", "foo");
-    int bobId = contactManager.addNewContact("Bob", "bar");
-    int anotherAmyId = contactManager.addNewContact("Amy", "I'm a different Amy");
+    contactManager.addNewContact("Amy", "foo");
+    contactManager.addNewContact("Bob", "bar");
+    contactManager.addNewContact("Amy", "I'm a different Amy");
     Set<Contact> contacts = contactManager.getContacts("Amy");
 
     assertEquals(2, contacts.size());
