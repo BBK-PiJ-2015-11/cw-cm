@@ -7,7 +7,8 @@ import java.util.Set;
 
 public class ContactManagerImpl implements ContactManager {
   private HashMap<Integer, Contact> contacts = new HashMap<>();
-  private HashMap<Integer, Meeting> meetings = new HashMap<>();
+  private HashMap<Integer, PastMeeting> pastMeetings = new HashMap<>();
+  private HashMap<Integer, FutureMeeting> futureMeetings = new HashMap<>();
   private int lastUsedContactId;
   private int lastUsedMeetingId;
 
@@ -28,8 +29,8 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     int id = this.getUnusedMeetingId();
-    Meeting m = new FutureMeetingImpl(id, date, contacts);
-    this.meetings.put(id, m);
+    FutureMeeting m = new FutureMeetingImpl(id, date, contacts);
+    this.futureMeetings.put(id, m);
     return id;
   }
 
@@ -77,8 +78,8 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     int id = this.getUnusedMeetingId();
-    Meeting m = new PastMeetingImpl(id, date, contacts, text);
-    this.meetings.put(id, m);
+    PastMeeting m = new PastMeetingImpl(id, date, contacts, text);
+    this.pastMeetings.put(id, m);
   }
 
   public PastMeeting addMeetingNotes(int id, String text) {
