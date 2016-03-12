@@ -221,4 +221,34 @@ public class TestContactManagerImpl {
     PastMeeting meeting = contactManager.getPastMeeting(999);
     assertEquals(meeting, null);
   }
+
+  @Test
+  public void testGetMeetingThatHappensToBeInPast() {
+    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    Set<Contact> contacts = contactManager.getContacts(contactId);
+
+    contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
+
+    // FIXME: Remove magic number
+    Meeting meeting = contactManager.getMeeting(1);
+    assertEquals(1, meeting.getId());
+  }
+
+  @Test
+  public void testGetMeetingThatHappensToBeInFuture() {
+    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    Set<Contact> contacts = contactManager.getContacts(contactId);
+
+    contactManager.addFutureMeeting(contacts, this.futureDate);
+
+    // FIXME: Remove magic number
+    Meeting meeting = contactManager.getMeeting(1);
+    assertEquals(1, meeting.getId());
+  }
+
+  @Test
+  public void testGetMeetingNonexistent() {
+    PastMeeting meeting = contactManager.getPastMeeting(999);
+    assertEquals(meeting, null);
+  }
 }
