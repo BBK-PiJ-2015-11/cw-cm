@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class ContactManagerImpl implements ContactManager {
-  private HashMap<Integer, Contact> contacts = new HashMap<Integer, Contact>();
-  private HashMap<Integer, Meeting> meetings = new HashMap<Integer, Meeting>();
+  private HashMap<Integer, Contact> contacts = new HashMap<>();
+  private HashMap<Integer, Meeting> meetings = new HashMap<>();
   private int lastUsedContactId;
   private int lastUsedMeetingId;
 
