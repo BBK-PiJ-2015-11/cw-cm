@@ -19,7 +19,7 @@ public class TestMeetingImpl {
    * MeetingImpl is abstract, so create a non-abstract implementation
    * which acts as thin wrapper around MeetingImpl so that we can test it.
    */
-  public class NonAbstractMeetingImpl extends MeetingImpl {
+  static public class NonAbstractMeetingImpl extends MeetingImpl {
     private int id;
     private Calendar startDate;
     private Set<Contact> contacts;
