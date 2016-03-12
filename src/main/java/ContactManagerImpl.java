@@ -35,7 +35,19 @@ public class ContactManagerImpl implements ContactManager {
   }
 
   public PastMeeting getPastMeeting(int id) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    PastMeeting pastMeeting = this.pastMeetings.get(id);
+    FutureMeeting futureMeeting = this.futureMeetings.get(id);
+
+    if (pastMeeting == null && futureMeeting == null) {
+      return null;
+    }
+
+    Calendar now = Calendar.getInstance();
+    if ((pastMeeting != null && pastMeeting.getDate().after(now)) || futureMeeting != null) {
+      throw new IllegalStateException();
+    }
+
+    return pastMeeting;
   }
 
   public FutureMeeting getFutureMeeting(int id) {
