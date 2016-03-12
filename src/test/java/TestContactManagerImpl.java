@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 public class TestContactManagerImpl {
@@ -219,7 +220,7 @@ public class TestContactManagerImpl {
   @Test
   public void testGetPastMeetingNonexistent() {
     PastMeeting meeting = contactManager.getPastMeeting(999);
-    assertEquals(meeting, null);
+    assertNull(meeting);
   }
 
   @Test
@@ -249,6 +250,6 @@ public class TestContactManagerImpl {
   @Test
   public void testGetMeetingNonexistent() {
     PastMeeting meeting = contactManager.getPastMeeting(999);
-    assertEquals(meeting, null);
+    assertNull(meeting);
   }
 }
