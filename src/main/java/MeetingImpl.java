@@ -2,9 +2,10 @@ import java.util.Calendar;
 import java.util.Set;
 
 abstract public class MeetingImpl implements Meeting {
-  private int id;
-  private Calendar startDate;
-  private Set<Contact> contacts;
+  protected int id;
+  protected Calendar startDate;
+  protected Set<Contact> contacts;
+  protected String notes;
 
   public MeetingImpl(int id, Calendar startDate, Set<Contact> contacts) {
     if (id < 1) {
@@ -37,5 +38,9 @@ abstract public class MeetingImpl implements Meeting {
   @Override
   public Set<Contact> getContacts() {
     return this.contacts;
+  }
+
+  public String getNotes() {
+    return this.notes;
   }
 }

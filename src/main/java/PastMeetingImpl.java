@@ -2,11 +2,6 @@ import java.util.Calendar;
 import java.util.Set;
 
 public class PastMeetingImpl extends MeetingImpl implements PastMeeting {
-  private int id;
-  private Calendar startDate;
-  private Set<Contact> contacts;
-  private String notes;
-
   public PastMeetingImpl(int id, Calendar startDate, Set<Contact> contacts, String notes) {
     super(id, startDate, contacts);
 
@@ -23,6 +18,6 @@ public class PastMeetingImpl extends MeetingImpl implements PastMeeting {
 
   @Override
   public String getNotes() {
-    return this.notes;
+    return super.getNotes();
   }
 }
