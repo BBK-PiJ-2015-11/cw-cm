@@ -193,4 +193,32 @@ public class TestContactManagerImpl {
 
     contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
   }
+
+  @Test
+  public void testGetPastMeeting() {
+    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    Set<Contact> contacts = contactManager.getContacts(contactId);
+
+    contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
+    // FIXME: Remove magic number
+    PastMeeting meeting = contactManager.getPastMeeting(1);
+    // FIXME: Remove magic number
+    assertEquals(meeting.getId(), 1);
+  }
+
+  @Test (expected = IllegalStateException.class)
+  public void testGetPastMeetingThatIsFuture() {
+    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    Set<Contact> contacts = contactManager.getContacts(contactId);
+
+    contactManager.addNewPastMeeting(contacts, this.futureDate, "Meeting notes");
+    // FIXME: Remove magic number
+    contactManager.getPastMeeting(1);
+  }
+
+  @Test
+  public void testGetPastMeetingNonexistent() {
+    PastMeeting meeting = contactManager.getPastMeeting(999);
+    assertEquals(meeting, null);
+  }
 }
