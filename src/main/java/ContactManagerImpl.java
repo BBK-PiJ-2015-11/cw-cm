@@ -43,7 +43,7 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     Calendar now = Calendar.getInstance();
-    if ((pastMeeting != null && pastMeeting.getDate().after(now)) || futureMeeting != null) {
+    if (pastMeeting != null && pastMeeting.getDate().after(now) || futureMeeting != null) {
       throw new IllegalStateException();
     }
 
