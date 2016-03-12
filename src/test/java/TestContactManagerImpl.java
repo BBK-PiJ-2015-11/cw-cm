@@ -58,7 +58,7 @@ public class TestContactManagerImpl {
     int bobId = contactManager.addNewContact("Bob", "bar");
     Set<Contact> contacts = contactManager.getContacts(amyId, bobId);
 
-    assertEquals(contacts.size(), 2);
+    assertEquals(2, contacts.size());
   }
 
   @Test (expected = IllegalArgumentException.class)
@@ -204,7 +204,7 @@ public class TestContactManagerImpl {
     // FIXME: Remove magic number
     PastMeeting meeting = contactManager.getPastMeeting(1);
     // FIXME: Remove magic number
-    assertEquals(meeting.getId(), 1);
+    assertEquals(1, meeting.getId());
   }
 
   @Test (expected = IllegalStateException.class)
