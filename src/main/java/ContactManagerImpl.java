@@ -55,7 +55,7 @@ public class ContactManagerImpl implements ContactManager {
   }
 
   public Meeting getMeeting(int id) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    return this.pastMeetings.get(id) != null ? this.pastMeetings.get(id) : this.futureMeetings.get(id);
   }
 
   public List<Meeting> getFutureMeetingList(Contact contact) {
