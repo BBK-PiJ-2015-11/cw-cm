@@ -249,7 +249,7 @@ public class TestContactManagerImpl {
 
   @Test
   public void testGetMeetingNonexistent() {
-    PastMeeting meeting = contactManager.getPastMeeting(999);
+    Meeting meeting = contactManager.getMeeting(999);
     assertNull(meeting);
   }
 }
