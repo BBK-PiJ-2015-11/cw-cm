@@ -252,4 +252,22 @@ public class TestContactManagerImpl {
     Meeting meeting = contactManager.getMeeting(999);
     assertNull(meeting);
   }
+
+  @Test
+  public void testGetFutureMeeting() {
+    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    Set<Contact> contacts = contactManager.getContacts(contactId);
+
+    contactManager.addFutureMeeting(contacts, this.futureDate);
+
+    // FIXME: Remove magic number
+    Meeting meeting = contactManager.getFutureMeeting(1);
+    assertEquals(1, meeting.getId());
+  }
+
+  @Test
+  public void testGetFutureMeetingNonexistent() {
+    FutureMeeting meeting = contactManager.getFutureMeeting(999);
+    assertNull(meeting);
+  }
 }
