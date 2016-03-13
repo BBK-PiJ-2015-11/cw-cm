@@ -1,6 +1,8 @@
-apply plugin: 'findbugs'
-apply plugin: 'java'
-apply plugin: 'pmd'
+plugins {
+  id 'findbugs'
+  id 'java'
+  id 'pmd'
+}
 
 findbugs.toolVersion = '3.0.1'
 
