@@ -16,7 +16,6 @@ public class TestContactManagerImpl {
   private ContactManager contactManager;
   private Calendar futureDate;
   private Calendar pastDate;
-  private Set<Contact> contacts;
 
   @Before
   public void setUp() {
