@@ -116,7 +116,7 @@ public class TestContactManagerImpl {
   @Test (expected = IllegalArgumentException.class)
   public void testAddFutureMeetingNonexistentContact() {
     Set<Contact> contacts = new HashSet<Contact>();
-    Contact unknownContact = new ContactImpl(1, "Zuul",  "bork bork bork");
+    Contact unknownContact = new ContactImpl(1, "Zuul", "bork bork bork");
     contacts.add(unknownContact);
 
     contactManager.addFutureMeeting(contacts, this.futureDate);
@@ -189,7 +189,7 @@ public class TestContactManagerImpl {
   @Test (expected = IllegalArgumentException.class)
   public void testAddNewPastMeetingNonexistentContacts() {
     Set<Contact> contacts = new HashSet<Contact>();
-    Contact unknownContact = new ContactImpl(1, "Zuul",  "bork bork bork");
+    Contact unknownContact = new ContactImpl(1, "Zuul", "bork bork bork");
     contacts.add(unknownContact);
 
     contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
@@ -289,7 +289,7 @@ public class TestContactManagerImpl {
 
   @Test (expected = IllegalArgumentException.class)
   public void testGetFutureMeetingListByContactNonexistentContact() {
-    Contact unknownContact = new ContactImpl(1, "Zuul",  "bork bork bork");
+    Contact unknownContact = new ContactImpl(1, "Zuul", "bork bork bork");
     contactManager.getFutureMeetingList(unknownContact);
   }
 
@@ -368,7 +368,7 @@ public class TestContactManagerImpl {
   @Test (expected = IllegalArgumentException.class)
   public void testGetPastMeetingListForNonexistentContact() {
     Set<Contact> contacts = new HashSet<Contact>();
-    Contact unknownContact = new ContactImpl(1, "Zuul",  "bork bork bork");
+    Contact unknownContact = new ContactImpl(1, "Zuul", "bork bork bork");
     contacts.add(unknownContact);
 
     contactManager.getPastMeetingListFor(unknownContact);
