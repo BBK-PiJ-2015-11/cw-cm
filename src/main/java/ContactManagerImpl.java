@@ -214,7 +214,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
 
   public void flush() {
     String homeDirectory = System.getProperty("user.home");
-    String saveFilePath = new File(homeDirectory, "contact_manager.ser").toString();
+    String saveFilePath = new File(homeDirectory, "contacts.txt").toString();
 
     try {
       FileOutputStream fileOutput = new FileOutputStream(saveFilePath);
