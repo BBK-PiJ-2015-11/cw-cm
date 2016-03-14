@@ -270,4 +270,18 @@ public class TestContactManagerImpl {
     FutureMeeting meeting = contactManager.getFutureMeeting(999);
     assertNull(meeting);
   }
+
+  @Test
+  public void testFlush() {
+    contactManager.flush();
+  }
+
+  @Test
+  public void testFlushWithData() {
+    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    Set<Contact> contacts = contactManager.getContacts(contactId);
+
+    contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
+    contactManager.flush();
+  }
 }
