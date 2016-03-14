@@ -26,7 +26,6 @@ public class TestContactManagerImpl {
     pastDate.add(Calendar.YEAR, -1);
 
     contactManager = new ContactManagerImpl();
-
     unknownContact = new ContactImpl(1, "Zuul", "bork bork bork");
   }
 
