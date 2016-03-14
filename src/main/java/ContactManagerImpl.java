@@ -141,9 +141,9 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     }
 
     HashSet<Contact> contacts = new HashSet<Contact>();
-    for(Map.Entry<Integer, Contact> c : this.contacts.entrySet()) {
-      if (c.getValue().getName().equals(name)) {
-        contacts.add(c.getValue());
+    for(Contact c : this.contacts.values()) {
+      if (c.getName().equals(name)) {
+        contacts.add(c);
       }
     }
 
