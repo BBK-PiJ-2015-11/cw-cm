@@ -14,7 +14,7 @@ tasks.withType(FindBugs) {
 }
 
 tasks.withType(JavaCompile) {
-    options.compilerArgs << '-Xlint:all' << '-Xdoclint:syntax' << '-Xdiags:verbose'
+    options.compilerArgs << '-Xlint:all' << '-Xdiags:verbose'
 }
 
 repositories {
