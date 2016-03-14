@@ -118,7 +118,27 @@ public class ContactManagerImpl implements ContactManager, Serializable {
   }
 
   public List<PastMeeting> getPastMeetingListFor(Contact contact) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    if (contact == null) {
+      throw new NullPointerException();
+    }
+
+    if (!this.contacts.containsKey(contact.getId())) {
+      throw new IllegalArgumentException();
+    }
+
+    List<PastMeeting> meetings = new ArrayList<>();
+    for (PastMeeting m : this.pastMeetings.values()) {
+      if (m.getContacts().contains(contact)) {
+        meetings.add(m);
+      }
+    }
+
+    Collections.sort(meetings, new Comparator<Meeting>() {
+      public int compare(Meeting a, Meeting b) {
+        return a.getDate().compareTo(b.getDate());
+      }
+    });
+    return meetings;
   }
 
   public void addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) {
