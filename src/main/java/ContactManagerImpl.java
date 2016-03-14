@@ -26,6 +26,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
   private int lastUsedContactId;
   private int lastUsedMeetingId;
 
+  @Override
   public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
     if (contacts == null || date == null) {
       throw new NullPointerException();
@@ -48,6 +49,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return id;
   }
 
+  @Override
   public PastMeeting getPastMeeting(int id) {
     PastMeeting pastMeeting = this.pastMeetings.get(id);
     FutureMeeting futureMeeting = this.futureMeetings.get(id);
@@ -64,14 +66,17 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return pastMeeting;
   }
 
+  @Override
   public FutureMeeting getFutureMeeting(int id) {
     return this.futureMeetings.get(id);
   }
 
+  @Override
   public Meeting getMeeting(int id) {
     return this.pastMeetings.get(id) != null ? this.pastMeetings.get(id) : this.futureMeetings.get(id);
   }
 
+  @Override
   public List<Meeting> getFutureMeetingList(Contact contact) {
     if (contact == null) {
       throw new NullPointerException();
@@ -96,6 +101,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return meetings;
   }
 
+  @Override
   public List<Meeting> getMeetingListOn(Calendar date) {
     if (date == null) {
       throw new NullPointerException();
@@ -123,6 +129,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return meetings;
   }
 
+  @Override
   public List<PastMeeting> getPastMeetingListFor(Contact contact) {
     if (contact == null) {
       throw new NullPointerException();
@@ -147,6 +154,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return meetings;
   }
 
+  @Override
   public void addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) {
     if (contacts == null || date == null || text == null) {
       throw new NullPointerException();
@@ -167,10 +175,12 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     this.pastMeetings.put(id, m);
   }
 
+  @Override
   public PastMeeting addMeetingNotes(int id, String text) {
     throw new UnsupportedOperationException("Not yet implemented");
   }
 
+  @Override
   public int addNewContact(String name, String notes) {
     if (name == null || notes == null) {
       throw new NullPointerException();
@@ -185,6 +195,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return contact.getId();
   }
 
+  @Override
   public Set<Contact> getContacts(int... ids) {
     if (ids.length == 0) {
       throw new IllegalArgumentException();
@@ -203,6 +214,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return contacts;
   }
 
+  @Override
   public Set<Contact> getContacts(String name) {
     if (name == null) {
       throw new NullPointerException();
@@ -218,6 +230,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return contacts;
   }
 
+  @Override
   public void flush() {
     String homeDirectory = System.getProperty("user.home");
     String saveFilePath = new File(homeDirectory, "contacts.txt").toString();
