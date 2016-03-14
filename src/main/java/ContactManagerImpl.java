@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -5,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ContactManagerImpl implements ContactManager {
+public class ContactManagerImpl implements ContactManager, Serializable {
   private HashMap<Integer, Contact> contacts = new HashMap<>();
   private HashMap<Integer, PastMeeting> pastMeetings = new HashMap<>();
   private HashMap<Integer, FutureMeeting> futureMeetings = new HashMap<>();
@@ -146,7 +151,18 @@ public class ContactManagerImpl implements ContactManager {
   }
 
   public void flush() {
-    throw new UnsupportedOperationException("Not yet implemented");
+    String homeDirectory = System.getProperty("user.home");
+    String saveFilePath = new File(homeDirectory, "contact_manager.ser").toString();
+
+    try {
+      FileOutputStream fileOutput = new FileOutputStream(saveFilePath);
+      ObjectOutputStream outputStream = new ObjectOutputStream(fileOutput);
+      outputStream.writeObject(this);
+      outputStream.close();
+    } catch(IOException e) {
+      // FIXME Improve this
+      e.printStackTrace();
+    }
   }
 
   private int getUnusedContactId() {
