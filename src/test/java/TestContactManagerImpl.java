@@ -197,7 +197,7 @@ public class TestContactManagerImpl {
 
   @Test
   public void testGetPastMeeting() {
-    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    int contactId = contactManager.addNewContact("Amy", "bork bork bork");
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
@@ -209,7 +209,7 @@ public class TestContactManagerImpl {
 
   @Test (expected = IllegalStateException.class)
   public void testGetPastMeetingThatIsFuture() {
-    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    int contactId = contactManager.addNewContact("Amy", "bork bork bork");
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     contactManager.addNewPastMeeting(contacts, this.futureDate, "Meeting notes");
@@ -225,7 +225,7 @@ public class TestContactManagerImpl {
 
   @Test
   public void testGetMeetingThatHappensToBeInPast() {
-    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    int contactId = contactManager.addNewContact("Amy", "bork bork bork");
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
@@ -237,7 +237,7 @@ public class TestContactManagerImpl {
 
   @Test
   public void testGetMeetingThatHappensToBeInFuture() {
-    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    int contactId = contactManager.addNewContact("Amy", "bork bork bork");
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     contactManager.addFutureMeeting(contacts, this.futureDate);
@@ -255,7 +255,7 @@ public class TestContactManagerImpl {
 
   @Test
   public void testGetFutureMeeting() {
-    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    int contactId = contactManager.addNewContact("Amy", "bork bork bork");
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     contactManager.addFutureMeeting(contacts, this.futureDate);
@@ -273,7 +273,7 @@ public class TestContactManagerImpl {
 
   @Test
   public void testGetFutureMeetingListByContact() {
-    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    int contactId = contactManager.addNewContact("Amy", "bork bork bork");
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     contactManager.addFutureMeeting(contacts, this.futureDate);
@@ -294,7 +294,7 @@ public class TestContactManagerImpl {
 
   @Test
   public void testGetFutureMeetingListByContactSortedByDate() {
-    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    int contactId = contactManager.addNewContact("Amy", "bork bork bork");
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     Calendar firstFutureDate = Calendar.getInstance();
@@ -319,7 +319,7 @@ public class TestContactManagerImpl {
 
   @Test
   public void testGetFutureMeetingListByContactNoneFound() {
-    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    int contactId = contactManager.addNewContact("Amy", "bork bork bork");
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     List<Meeting> meetings = contactManager.getFutureMeetingList(contacts.iterator().next());
@@ -328,7 +328,7 @@ public class TestContactManagerImpl {
 
   @Test
   public void testGetMeetingListOn() {
-    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    int contactId = contactManager.addNewContact("Amy", "bork bork bork");
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     contactManager.addFutureMeeting(contacts, this.futureDate);
@@ -350,7 +350,7 @@ public class TestContactManagerImpl {
 
   @Test
   public void testGetPastMeetingListFor() {
-    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    int contactId = contactManager.addNewContact("Amy", "bork bork bork");
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
@@ -371,7 +371,7 @@ public class TestContactManagerImpl {
 
   @Test
   public void testGetPastMeetingListForSortedByDate() {
-    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    int contactId = contactManager.addNewContact("Amy", "bork bork bork");
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     Calendar firstPastDate = Calendar.getInstance();
@@ -396,7 +396,7 @@ public class TestContactManagerImpl {
 
   @Test
   public void testGetPastMeetingListForNoneFound() {
-    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    int contactId = contactManager.addNewContact("Amy", "bork bork bork");
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     List<PastMeeting> meetings = contactManager.getPastMeetingListFor(contacts.iterator().next());
@@ -410,7 +410,7 @@ public class TestContactManagerImpl {
 
   @Test
   public void testFlushWithData() {
-    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    int contactId = contactManager.addNewContact("Amy", "bork bork bork");
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
