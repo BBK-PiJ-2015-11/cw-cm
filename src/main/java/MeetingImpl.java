@@ -3,6 +3,7 @@ import java.util.Calendar;
 import java.util.Set;
 
 abstract public class MeetingImpl implements Meeting, Serializable {
+  private static final long serialVersionUID = 1L;
   protected int id;
   protected Calendar startDate;
   protected Set<Contact> contacts;

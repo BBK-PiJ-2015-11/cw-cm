@@ -20,6 +20,7 @@ public class TestMeetingImpl {
    * which acts as thin wrapper around MeetingImpl so that we can test it.
    */
   static public class NonAbstractMeetingImpl extends MeetingImpl {
+    private static final long serialVersionUID = 1L;
     private int id;
     private Calendar startDate;
     private Set<Contact> contacts;

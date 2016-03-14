@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class ContactManagerImpl implements ContactManager, Serializable {
+  private static final long serialVersionUID = 1L;
   private HashMap<Integer, Contact> contacts = new HashMap<>();
   private HashMap<Integer, PastMeeting> pastMeetings = new HashMap<>();
   private HashMap<Integer, FutureMeeting> futureMeetings = new HashMap<>();
