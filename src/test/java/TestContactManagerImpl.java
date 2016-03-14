@@ -16,6 +16,7 @@ public class TestContactManagerImpl {
   private ContactManager contactManager;
   private Calendar futureDate;
   private Calendar pastDate;
+  private Contact unknownContact;
 
   @Before
   public void setUp() {
@@ -25,6 +26,8 @@ public class TestContactManagerImpl {
     pastDate.add(Calendar.YEAR, -1);
 
     contactManager = new ContactManagerImpl();
+
+    unknownContact = new ContactImpl(1, "Zuul", "bork bork bork");
   }
 
   @Test
@@ -116,7 +119,6 @@ public class TestContactManagerImpl {
   @Test (expected = IllegalArgumentException.class)
   public void testAddFutureMeetingNonexistentContact() {
     Set<Contact> contacts = new HashSet<Contact>();
-    Contact unknownContact = new ContactImpl(1, "Zuul", "bork bork bork");
     contacts.add(unknownContact);
 
     contactManager.addFutureMeeting(contacts, this.futureDate);
@@ -189,7 +191,6 @@ public class TestContactManagerImpl {
   @Test (expected = IllegalArgumentException.class)
   public void testAddNewPastMeetingNonexistentContacts() {
     Set<Contact> contacts = new HashSet<Contact>();
-    Contact unknownContact = new ContactImpl(1, "Zuul", "bork bork bork");
     contacts.add(unknownContact);
 
     contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
@@ -289,7 +290,6 @@ public class TestContactManagerImpl {
 
   @Test (expected = IllegalArgumentException.class)
   public void testGetFutureMeetingListByContactNonexistentContact() {
-    Contact unknownContact = new ContactImpl(1, "Zuul", "bork bork bork");
     contactManager.getFutureMeetingList(unknownContact);
   }
 
@@ -367,7 +367,6 @@ public class TestContactManagerImpl {
 
   @Test (expected = IllegalArgumentException.class)
   public void testGetPastMeetingListForNonexistentContact() {
-    Contact unknownContact = new ContactImpl(1, "Zuul", "bork bork bork");
     contactManager.getPastMeetingListFor(unknownContact);
   }
 
