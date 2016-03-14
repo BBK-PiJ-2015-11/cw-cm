@@ -367,10 +367,7 @@ public class TestContactManagerImpl {
 
   @Test (expected = IllegalArgumentException.class)
   public void testGetPastMeetingListForNonexistentContact() {
-    Set<Contact> contacts = new HashSet<Contact>();
     Contact unknownContact = new ContactImpl(1, "Zuul", "bork bork bork");
-    contacts.add(unknownContact);
-
     contactManager.getPastMeetingListFor(unknownContact);
   }
 
