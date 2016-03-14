@@ -3,7 +3,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -64,7 +67,27 @@ public class ContactManagerImpl implements ContactManager, Serializable {
   }
 
   public List<Meeting> getFutureMeetingList(Contact contact) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    if (contact == null) {
+      throw new NullPointerException();
+    }
+
+    if (!this.contacts.containsKey(contact.getId())) {
+      throw new IllegalArgumentException();
+    }
+
+    List<Meeting> meetings = new ArrayList<>();
+    for (Meeting m : this.futureMeetings.values()) {
+      if (m.getContacts().contains(contact)) {
+        meetings.add(m);
+      }
+    }
+
+    Collections.sort(meetings, new Comparator<Meeting>() {
+      public int compare(Meeting a, Meeting b) {
+        return a.getDate().compareTo(b.getDate());
+      }
+    });
+    return meetings;
   }
 
   public List<Meeting> getMeetingListOn(Calendar date) {
