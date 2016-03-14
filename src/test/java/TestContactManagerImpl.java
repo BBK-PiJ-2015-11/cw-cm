@@ -329,6 +329,28 @@ public class TestContactManagerImpl {
   }
 
   @Test
+  public void testGetMeetingListOn() {
+    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    Set<Contact> contacts = contactManager.getContacts(contactId);
+
+    contactManager.addFutureMeeting(contacts, this.futureDate);
+
+    List<Meeting> meetings = contactManager.getMeetingListOn(this.futureDate);
+    assertEquals(1, meetings.size());
+  }
+
+  @Test (expected = NullPointerException.class)
+  public void testGetMeetingListOnNullDate() {
+    contactManager.getMeetingListOn(null);
+  }
+
+  @Test
+  public void testGetMeetingListOnNoneFound() {
+    List<Meeting> meetings = contactManager.getMeetingListOn(this.futureDate);
+    assertEquals(0, meetings.size());
+  }
+
+  @Test
   public void testFlush() {
     contactManager.flush();
   }
