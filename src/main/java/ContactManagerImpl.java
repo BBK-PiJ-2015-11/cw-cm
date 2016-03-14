@@ -91,11 +91,30 @@ public class ContactManagerImpl implements ContactManager, Serializable {
   }
 
   public List<Meeting> getMeetingListOn(Calendar date) {
-    throw new UnsupportedOperationException("Not yet implemented");
-  }
+    if (date == null) {
+      throw new NullPointerException();
+    }
 
-  public List<Meeting> getFutureMeetingList(Calendar date) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    List<Meeting> meetings = new ArrayList<>();
+
+    for (Meeting m : this.pastMeetings.values()) {
+      if (m.getDate().equals(date)) {
+        meetings.add(m);
+      }
+    }
+
+    for (Meeting m : this.futureMeetings.values()) {
+      if (m.getDate().equals(date)) {
+        meetings.add(m);
+      }
+    }
+
+    Collections.sort(meetings, new Comparator<Meeting>() {
+      public int compare(Meeting a, Meeting b) {
+        return a.getDate().compareTo(b.getDate());
+      }
+    });
+    return meetings;
   }
 
   public List<PastMeeting> getPastMeetingListFor(Contact contact) {
