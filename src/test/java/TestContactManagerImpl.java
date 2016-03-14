@@ -1,5 +1,6 @@
 import java.util.Calendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.After;
@@ -269,6 +270,62 @@ public class TestContactManagerImpl {
   public void testGetFutureMeetingNonexistent() {
     FutureMeeting meeting = contactManager.getFutureMeeting(999);
     assertNull(meeting);
+  }
+
+  @Test
+  public void testGetFutureMeetingListByContact() {
+    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    Set<Contact> contacts = contactManager.getContacts(contactId);
+
+    contactManager.addFutureMeeting(contacts, this.futureDate);
+
+    List<Meeting> meetings = contactManager.getFutureMeetingList(contacts.iterator().next());
+    assertEquals(1, meetings.size());
+  }
+
+  @Test (expected = NullPointerException.class)
+  public void testGetFutureMeetingListByContactNullContact() {
+    contactManager.getFutureMeetingList(null);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testGetFutureMeetingListByContactNonexistentContact() {
+    Contact unknownContact = new ContactImpl(1, "Zuul",  "bork bork bork");
+    contactManager.getFutureMeetingList(unknownContact);
+  }
+
+  @Test
+  public void testGetFutureMeetingListByContactSortedByDate() {
+    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    Set<Contact> contacts = contactManager.getContacts(contactId);
+
+    Calendar firstFutureDate = Calendar.getInstance();
+    Calendar secondFutureDate = Calendar.getInstance();
+    Calendar thirdFutureDate = Calendar.getInstance();
+
+    firstFutureDate.add(Calendar.MONTH, 3);
+    secondFutureDate.add(Calendar.YEAR, 1);
+    thirdFutureDate.add(Calendar.MONTH, 18);
+
+    // Intentionally add these out of order to test that meetings aren't
+    // returned in the order that they're added
+    contactManager.addFutureMeeting(contacts, secondFutureDate);
+    contactManager.addFutureMeeting(contacts, firstFutureDate);
+    contactManager.addFutureMeeting(contacts, thirdFutureDate);
+
+    List<Meeting> meetings = contactManager.getFutureMeetingList(contacts.iterator().next());
+    assertEquals(firstFutureDate, meetings.get(0).getDate());
+    assertEquals(secondFutureDate, meetings.get(1).getDate());
+    assertEquals(thirdFutureDate, meetings.get(2).getDate());
+  }
+
+  @Test
+  public void testGetFutureMeetingListByContactNoneFound() {
+    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    Set<Contact> contacts = contactManager.getContacts(contactId);
+
+    List<Meeting> meetings = contactManager.getFutureMeetingList(contacts.iterator().next());
+    assertEquals(0, meetings.size());
   }
 
   @Test
