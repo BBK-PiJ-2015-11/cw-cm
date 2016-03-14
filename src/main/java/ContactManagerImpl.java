@@ -241,7 +241,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
       outputStream.writeObject(this);
       outputStream.close();
     } catch(IOException e) {
-      // FIXME Improve this
+      System.out.println("General I/O exception: " + e.getMessage());
       e.printStackTrace();
     }
   }
