@@ -351,6 +351,65 @@ public class TestContactManagerImpl {
   }
 
   @Test
+  public void testGetPastMeetingListFor() {
+    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    Set<Contact> contacts = contactManager.getContacts(contactId);
+
+    contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
+
+    List<PastMeeting> meetings = contactManager.getPastMeetingListFor(contacts.iterator().next());
+    assertEquals(1, meetings.size());
+  }
+
+  @Test (expected = NullPointerException.class)
+  public void testGetPastMeetingListForNullContact() {
+    contactManager.getPastMeetingListFor(null);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testGetPastMeetingListForNonexistentContact() {
+    Set<Contact> contacts = new HashSet<Contact>();
+    Contact unknownContact = new ContactImpl(1, "Zuul",  "bork bork bork");
+    contacts.add(unknownContact);
+
+    contactManager.getPastMeetingListFor(unknownContact);
+  }
+
+  @Test
+  public void testGetPastMeetingListForSortedByDate() {
+    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    Set<Contact> contacts = contactManager.getContacts(contactId);
+
+    Calendar firstPastDate = Calendar.getInstance();
+    Calendar secondPastDate = Calendar.getInstance();
+    Calendar thirdPastDate = Calendar.getInstance();
+
+    firstPastDate.add(Calendar.MONTH, -18);
+    secondPastDate.add(Calendar.YEAR, -1);
+    thirdPastDate.add(Calendar.MONTH, -3);
+
+    // Intentionally add these out of order to test that meetings aren't
+    // returned in the order that they're added
+    contactManager.addNewPastMeeting(contacts, secondPastDate, "Meeting notes");
+    contactManager.addNewPastMeeting(contacts, firstPastDate, "Meeting notes");
+    contactManager.addNewPastMeeting(contacts, thirdPastDate, "Meeting notes");
+
+    List<PastMeeting> meetings = contactManager.getPastMeetingListFor(contacts.iterator().next());
+    assertEquals(firstPastDate, meetings.get(0).getDate());
+    assertEquals(secondPastDate, meetings.get(1).getDate());
+    assertEquals(thirdPastDate, meetings.get(2).getDate());
+  }
+
+  @Test
+  public void testGetPastMeetingListForNoneFound() {
+    int contactId = contactManager.addNewContact("Zuul", "bork bork bork");
+    Set<Contact> contacts = contactManager.getContacts(contactId);
+
+    List<PastMeeting> meetings = contactManager.getPastMeetingListFor(contacts.iterator().next());
+    assertEquals(0, meetings.size());
+  }
+
+  @Test
   public void testFlush() {
     contactManager.flush();
   }
