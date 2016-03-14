@@ -86,7 +86,7 @@ public class TestContactManagerImpl {
 
   @Test
   public void testGetContactsByNameNonExistent() {
-    Set<Contact> contacts = contactManager.getContacts("Zuul");
+    Set<Contact> contacts = contactManager.getContacts("NONEXISTENT");
     assertEquals(0, contacts.size());
   }
 
