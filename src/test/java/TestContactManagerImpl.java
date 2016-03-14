@@ -13,6 +13,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 public class TestContactManagerImpl {
+  private static final int NONEXISTENT_MEETING_ID = -1;
+  private static final int FIRST_ID = 1;
   private ContactManager contactManager;
   private Calendar futureDate;
   private Calendar pastDate;
@@ -26,7 +28,7 @@ public class TestContactManagerImpl {
     pastDate.add(Calendar.YEAR, -1);
 
     contactManager = new ContactManagerImpl();
-    unknownContact = new ContactImpl(1, "Zuul", "bork bork bork");
+    unknownContact = new ContactImpl(FIRST_ID, "Zuul", "bork bork bork");
   }
 
   @Test
@@ -201,10 +203,8 @@ public class TestContactManagerImpl {
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
-    // FIXME: Remove magic number
-    PastMeeting meeting = contactManager.getPastMeeting(1);
-    // FIXME: Remove magic number
-    assertEquals(1, meeting.getId());
+    PastMeeting meeting = contactManager.getPastMeeting(FIRST_ID);
+    assertEquals(FIRST_ID, meeting.getId());
   }
 
   @Test (expected = IllegalStateException.class)
@@ -213,13 +213,12 @@ public class TestContactManagerImpl {
     Set<Contact> contacts = contactManager.getContacts(contactId);
 
     contactManager.addNewPastMeeting(contacts, this.futureDate, "Meeting notes");
-    // FIXME: Remove magic number
-    contactManager.getPastMeeting(1);
+    contactManager.getPastMeeting(FIRST_ID);
   }
 
   @Test
   public void testGetPastMeetingNonexistent() {
-    PastMeeting meeting = contactManager.getPastMeeting(999);
+    PastMeeting meeting = contactManager.getPastMeeting(NONEXISTENT_MEETING_ID);
     assertNull(meeting);
   }
 
@@ -230,9 +229,8 @@ public class TestContactManagerImpl {
 
     contactManager.addNewPastMeeting(contacts, this.pastDate, "Meeting notes");
 
-    // FIXME: Remove magic number
-    Meeting meeting = contactManager.getMeeting(1);
-    assertEquals(1, meeting.getId());
+    Meeting meeting = contactManager.getMeeting(FIRST_ID);
+    assertEquals(FIRST_ID, meeting.getId());
   }
 
   @Test
@@ -242,14 +240,13 @@ public class TestContactManagerImpl {
 
     contactManager.addFutureMeeting(contacts, this.futureDate);
 
-    // FIXME: Remove magic number
-    Meeting meeting = contactManager.getMeeting(1);
-    assertEquals(1, meeting.getId());
+    Meeting meeting = contactManager.getMeeting(FIRST_ID);
+    assertEquals(FIRST_ID, meeting.getId());
   }
 
   @Test
   public void testGetMeetingNonexistent() {
-    Meeting meeting = contactManager.getMeeting(999);
+    Meeting meeting = contactManager.getMeeting(NONEXISTENT_MEETING_ID);
     assertNull(meeting);
   }
 
@@ -260,14 +257,13 @@ public class TestContactManagerImpl {
 
     contactManager.addFutureMeeting(contacts, this.futureDate);
 
-    // FIXME: Remove magic number
-    Meeting meeting = contactManager.getFutureMeeting(1);
-    assertEquals(1, meeting.getId());
+    Meeting meeting = contactManager.getFutureMeeting(FIRST_ID);
+    assertEquals(FIRST_ID, meeting.getId());
   }
 
   @Test
   public void testGetFutureMeetingNonexistent() {
-    FutureMeeting meeting = contactManager.getFutureMeeting(999);
+    FutureMeeting meeting = contactManager.getFutureMeeting(NONEXISTENT_MEETING_ID);
     assertNull(meeting);
   }
 
