@@ -13,6 +13,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Implements the {@link ContactManager} interface.
+ *
+ * @author Matt Bostock
+ */
 public class ContactManagerImpl implements ContactManager, Serializable {
   private static final long serialVersionUID = 1L;
   private HashMap<Integer, Contact> contacts = new HashMap<>();

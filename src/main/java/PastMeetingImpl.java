@@ -1,6 +1,11 @@
 import java.util.Calendar;
 import java.util.Set;
 
+/**
+ * Implements the {@link PastMeeting} interface by extending {@link MeetingImpl}.
+ *
+ * @author Matt Bostock
+ */
 public class PastMeetingImpl extends MeetingImpl implements PastMeeting {
   private static final long serialVersionUID = 1L;
 

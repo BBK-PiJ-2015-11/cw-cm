@@ -2,6 +2,11 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Set;
 
+/**
+ * Implements the {@link Meeting} interface.
+ *
+ * @author Matt Bostock
+ */
 abstract public class MeetingImpl implements Meeting, Serializable {
   private static final long serialVersionUID = 1L;
   protected int id;

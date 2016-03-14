@@ -1,5 +1,10 @@
 import java.io.Serializable;
 
+/**
+ * Implements the {@link Contact} interface.
+ *
+ * @author Matt Bostock
+ */
 public class ContactImpl implements Contact, Serializable {
   private static final long serialVersionUID = 1L;
   private int id;
